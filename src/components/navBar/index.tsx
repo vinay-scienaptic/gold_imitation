@@ -9,18 +9,19 @@ const NavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="transparent">
-        <Toolbar>
+        <Toolbar sx={{ padding: "1rem" }}>
           <img
             src={vsImage}
             alt="tirumala"
             style={{ width: "4rem", height: "4rem" }}
           />
+          <Box sx={{ flexGrow: 1 }} />
           <Typography
             variant="h6"
             component="div"
             sx={{
               fontWeight: 700,
-              fontSize: "1.5rem",
+              fontSize: "1.3rem",
               fontFamily: "Montserrat Alternates",
               padding: "10px 20px",
               fontStyle: "italic",
