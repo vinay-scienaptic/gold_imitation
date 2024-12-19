@@ -27,6 +27,7 @@ const CardContainer = styled(Box)(({ theme }) => ({
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
+
   width: "100%",
   height: "100%",
   overflow: "hidden", // Prevent content from spilling out
