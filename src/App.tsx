@@ -5,7 +5,7 @@ import NavBar from "./components/navBar";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 // Page Components
-const Home: React.FC = () => <h2 />;
+const Home: React.FC = () => <h2>Still is in progress</h2>;
 const About: React.FC = () => <h2>About Page</h2>;
 const Contact: React.FC = () => <h2>Contact Page</h2>;
 
