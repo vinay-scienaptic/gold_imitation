@@ -50,6 +50,7 @@ const StyledStack = styled(Stack)({
 
 // Add this new styled component for text content
 const ContentWrapper = styled(Stack)({
+  color: "#4e4b66",
   width: "100%",
   overflow: "hidden", // Prevent content from spilling out
   textOverflow: "ellipsis", // Add ellipsis for overflowing text

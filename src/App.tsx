@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/navBar";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import ContactUs from "./containers/contactUs";
-
 // Page Components
 const Home: React.FC = () => <h2>Still is in progress</h2>;
 const About: React.FC = () => <h2>About Page</h2>;
@@ -22,7 +21,7 @@ const App: React.FC = () => {
       },
       body1: {
         fontSize: "1.1rem",
-        color: "#333", // Dark color for text
+        color: "blue", // Dark color for text
       },
     },
   });
@@ -32,7 +31,6 @@ const App: React.FC = () => {
 
       <Router>
         <div className="App">
-          {/* Define Routes */}
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
