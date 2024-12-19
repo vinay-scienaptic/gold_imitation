@@ -1,49 +1,53 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import NavBar from "./components/navBar";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 // Page Components
-const Home: React.FC = () => <h2 className="gold-text">Home Page</h2>;
-const About: React.FC = () => <h2 className="gold-text">About Page</h2>;
-const Contact: React.FC = () => <h2 className="gold-text">Contact Page</h2>;
+const Home: React.FC = () => <h2 />;
+const About: React.FC = () => <h2>About Page</h2>;
+const Contact: React.FC = () => <h2>Contact Page</h2>;
 
 const App: React.FC = () => {
+  const theme = createTheme({
+    typography: {
+      fontFamily: '"Montserrat Alternates", sans-serif',
+      h1: {
+        fontSize: "2.5rem",
+        color: "#d4af37", // Gold color for h1
+      },
+      h2: {
+        fontSize: "2rem",
+        color: "#d4af37", // Gold color for h2
+      },
+      body1: {
+        fontSize: "1.1rem",
+        color: "#333", // Dark color for text
+      },
+    },
+    palette: {
+      primary: {
+        main: "#d4af37", // Gold color for primary elements like buttons
+      },
+    },
+  });
   return (
-    <Router>
-      <div className="App">
-        <header className="App-header">
-          <h1 className="gold-text">[Your Name]</h1>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
 
-          {/* Navigation Links */}
-          <nav>
-            <ul>
-              <li>
-                <Link to="/" className="gold-text">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="gold-text">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="gold-text">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-
-        {/* Define Routes */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </div>
-    </Router>
+      <Router>
+        <div className="App">
+          {/* Define Routes */}
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 };
 
