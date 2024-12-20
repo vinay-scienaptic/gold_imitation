@@ -70,8 +70,7 @@ const ContactUs: React.FC = () => {
         }}
       >
         <div style={{ marginTop: "40px", textAlign: "center" }}>
-          <h2>Visit Our Store - Working Hours: 9:00 am to 9:00 pm </h2>
-
+          <h2>Visit Our Store</h2>
           <div>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509364!2d76.945514!3d11.0277088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTEuMDE3MzA0LCA3Ni45NDgwODg5!5e0!3m2!1sen!2sus!4v1692635261530!5m2!1sen!2sus"
@@ -80,8 +79,23 @@ const ContactUs: React.FC = () => {
               style={{ border: 0 }}
               loading="lazy"
               title="Google Map"
-            />
+            ></iframe>
           </div>
+          {/* Clickable Link */}
+          <p style={{ marginTop: "10px" }}>
+            <a
+              href="https://www.google.com/maps/place/11%C2%B001'39.8%22N+76%C2%B056'53.1%22E/@11.0277088,76.945514,17z"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                textDecoration: "none",
+                color: "#007BFF",
+                fontWeight: "bold",
+              }}
+            >
+              Open in Google Maps
+            </a>
+          </p>
         </div>
       </Paper>
     </Container>

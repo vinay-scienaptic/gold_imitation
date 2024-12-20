@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/navBar";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import ContactUs from "./containers/contactUs";
+import Home from "./containers/home";
 // Page Components
-const Home: React.FC = () => <h2>Still is in progress</h2>;
 const About: React.FC = () => <h2>About Page</h2>;
 
 const App: React.FC = () => {
@@ -18,10 +18,6 @@ const App: React.FC = () => {
       h2: {
         fontSize: "2rem",
         color: "#d4af37", // Gold color for h2
-      },
-      body1: {
-        fontSize: "1.1rem",
-        color: "blue", // Dark color for text
       },
     },
   });

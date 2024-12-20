@@ -54,7 +54,7 @@ const NavBar = () => {
 
   const container = window !== undefined ? () => document.body : undefined;
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, marginBottom: "1rem" }}>
       <AppBar position="static" color="transparent">
         <Toolbar sx={{ padding: "1rem" }}>
           <IconButton
