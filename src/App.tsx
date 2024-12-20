@@ -4,8 +4,8 @@ import NavBar from "./components/navBar";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import ContactUs from "./containers/contactUs";
 import Home from "./containers/home";
+import About from "./containers/about";
 // Page Components
-const About: React.FC = () => <h2>About Page</h2>;
 
 const App: React.FC = () => {
   const theme = createTheme({
