@@ -21,10 +21,23 @@ const CustomCard = ({
 }: ICustomCard) => {
   return (
     <Paper
-      sx={{ maxWidth: 250, margin: "1rem", position: "relative" }}
+      sx={{
+        maxWidth: 250,
+        minHeight: 300,
+        margin: "1rem",
+        position: "relative",
+        "&:hover": {
+          transform: "scale(1.05)",
+          transition: "transform 0.3s ease-in-out",
+        },
+      }}
       elevation={5}
     >
-      <CardMedia sx={{ height: 150 }} image={vsImage} title="green iguana" />
+      <CardMedia
+        sx={{ height: 175, objectFit: "fill" }}
+        image={vsImage}
+        title="green iguana"
+      />
       <CardContent>
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Box display="flex" alignItems="center" gap={1}>
