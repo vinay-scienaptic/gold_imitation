@@ -125,7 +125,7 @@ const NavBar: React.FC = () => {
         setLoading(false);
       }
     },
-    []
+    [dispatch]
   );
 
   const handleGoogleLogin = useCallback(() => {
