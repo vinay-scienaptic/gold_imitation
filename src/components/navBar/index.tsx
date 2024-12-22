@@ -6,11 +6,6 @@ import {
   Typography,
   Button,
   Drawer,
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   IconButton,
   Avatar,
   CircularProgress,
@@ -24,6 +19,9 @@ import {
   setGoogleUserData,
 } from "../../store/slices/userSlice";
 import { useDispatch } from "react-redux";
+import { DrawerContent } from "./DrawerContent";
+import { UserSection } from "./userSection";
+import { NAV_STYLES } from "./styles";
 
 // Types
 interface CustomJwtPayload {
@@ -37,7 +35,7 @@ interface NavItem {
   href: string;
 }
 
-interface UserData {
+export interface UserData {
   name: string;
   picture: string;
 }
@@ -48,115 +46,6 @@ const NAV_ITEMS: readonly NavItem[] = [
   { text: "About", href: "/about" },
   { text: "Contact", href: "/contact" },
 ] as const;
-
-const STYLES = {
-  typography: {
-    fontWeight: 700,
-    fontSize: "1.3rem",
-    fontFamily: "Montserrat Alternates",
-    padding: "10px 20px",
-    fontStyle: "italic",
-    alignItems: "center",
-  },
-  drawer: {
-    width: 240,
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    marginLeft: "1rem",
-  },
-} as const;
-
-// Components
-const DrawerContent: React.FC<{ onClose: () => void }> = ({ onClose }) => (
-  <Box onClick={onClose} sx={{ textAlign: "center" }}>
-    <Divider />
-    <List>
-      {NAV_ITEMS.map((item) => (
-        <ListItem key={item.text} disablePadding>
-          <ListItemButton sx={{ textAlign: "center" }} href={item.href}>
-            <ListItemText primary={item.text} />
-          </ListItemButton>
-        </ListItem>
-      ))}
-    </List>
-  </Box>
-);
-
-const UserSection: React.FC<{
-  user: UserData | null;
-  loading: boolean;
-  error: string | null;
-  onGoogleLogin: () => void;
-}> = ({ user, loading, error, onGoogleLogin }) => {
-  const [imageLoading, setImageLoading] = useState(false);
-  const [imgError, setImgError] = useState(false);
-
-  useEffect(() => {
-    if (user?.picture) {
-      const img = new Image();
-      img.src = user.picture;
-      img.onerror = () => setImgError(true);
-      img.onload = () => setImgError(false);
-    }
-  }, [user?.picture]);
-
-  if (user) {
-    return (
-      <>
-        <Typography variant="subtitle1" sx={{ marginLeft: "1rem" }}>
-          Welcome, {user.name}
-        </Typography>
-        <Box sx={{ position: "relative", marginLeft: "1rem" }}>
-          <Avatar
-            alt={user.name}
-            src={
-              imgError ? undefined : `${user.picture}?${new Date().getTime()}`
-            }
-            key={user.picture}
-            sx={{
-              ...STYLES.avatar,
-              opacity: imageLoading ? 0.5 : 1,
-            }}
-            onLoad={() => setImageLoading(false)}
-            onLoadStart={() => setImageLoading(true)}
-          >
-            {imgError && user.name.charAt(0)}
-          </Avatar>
-
-          {imageLoading && (
-            <CircularProgress
-              size={20}
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                marginTop: "-10px",
-                marginLeft: "-10px",
-              }}
-            />
-          )}
-        </Box>
-      </>
-    );
-  }
-
-  return (
-    <>
-      {loading ? (
-        <CircularProgress color="inherit" size={24} />
-      ) : (
-        <div id="google-signin-button" />
-      )}
-      {error && (
-        <Typography color="error" sx={{ marginLeft: "1rem" }}>
-          {error}
-        </Typography>
-      )}
-    </>
-  );
-};
 
 // Main Component
 const NavBar: React.FC = () => {
@@ -280,7 +169,7 @@ const NavBar: React.FC = () => {
             style={{ width: "4rem", height: "4rem" }}
           />
           <Box sx={{ flexGrow: 1 }} />
-          <Typography variant="h6" component="div" sx={STYLES.typography}>
+          <Typography variant="h6" component="div" sx={NAV_STYLES.typography}>
             VS tirumala arts
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
@@ -320,7 +209,7 @@ const NavBar: React.FC = () => {
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: STYLES.drawer.width,
+              width: NAV_STYLES.drawer.width,
             },
           }}
         >
