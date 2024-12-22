@@ -21,6 +21,7 @@ const App: React.FC = () => {
       },
     },
   });
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

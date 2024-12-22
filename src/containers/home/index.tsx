@@ -16,8 +16,6 @@ const jewelryData: JewelryItem[] = [
     discountedPrice: 24999,
     description: "Bamine Platinum Diamond Pendant With Chain",
   },
-  // ... existing items ...
-  // Adding more items to demonstrate pagination
   {
     id: "6",
     actualPrice: 35900,
