@@ -19,6 +19,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { jwtDecode } from "jwt-decode";
 import vsImage from "../../VS.png";
 import { useGoogleLogin } from "../../hooks/useGoogleLogin";
+import {
+  clearGoogleUserData,
+  setGoogleUserData,
+} from "../../store/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 // Types
 interface CustomJwtPayload {
@@ -119,6 +124,7 @@ const UserSection: React.FC<{
           >
             {imgError && user.name.charAt(0)}
           </Avatar>
+
           {imageLoading && (
             <CircularProgress
               size={20}
@@ -141,11 +147,7 @@ const UserSection: React.FC<{
       {loading ? (
         <CircularProgress color="inherit" size={24} />
       ) : (
-        <div
-          id="google-signin-button"
-          data-testid="google-signin-button"
-          onClick={onGoogleLogin}
-        />
+        <div id="google-signin-button" />
       )}
       {error && (
         <Typography color="error" sx={{ marginLeft: "1rem" }}>
@@ -162,7 +164,7 @@ const NavBar: React.FC = () => {
   const [user, setUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -181,6 +183,20 @@ const NavBar: React.FC = () => {
   const handleDrawerToggle = useCallback(() => {
     setMobileOpen((prev) => !prev);
   }, []);
+  const handleLogout = () => {
+    // Dispatch the action to clear user data
+    dispatch(clearGoogleUserData());
+    localStorage.removeItem("user");
+    setUser(null);
+
+    // Optional: Remove Google credentials
+    if (window.google) {
+      window.google.accounts.id.disableAutoSelect(); // Prevent auto-login on refresh
+    }
+
+    // You can also clear other data, like tokens, from localStorage/sessionStorage
+    console.log("User logged out");
+  };
 
   const handleCredentialResponse = useCallback(
     async (response: { credential: string }) => {
@@ -189,6 +205,13 @@ const NavBar: React.FC = () => {
 
       try {
         const decodedToken = jwtDecode<CustomJwtPayload>(response.credential);
+        dispatch(
+          setGoogleUserData({
+            name: decodedToken.name,
+            email: decodedToken.email ?? null,
+            picture: decodedToken.picture,
+          })
+        );
 
         if (!decodedToken.name || !decodedToken.picture) {
           throw new Error("Invalid token data");
@@ -227,10 +250,13 @@ const NavBar: React.FC = () => {
     }
   }, []);
 
-  useGoogleLogin({
-    clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID!,
-    callback: handleCredentialResponse,
-  });
+  useGoogleLogin(
+    {
+      clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID!,
+      callback: handleCredentialResponse,
+    },
+    user
+  );
 
   const container =
     typeof window !== "undefined" ? () => document.body : undefined;
@@ -271,6 +297,16 @@ const NavBar: React.FC = () => {
             error={error}
             onGoogleLogin={handleGoogleLogin}
           />
+          {user?.name && (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleLogout}
+              sx={{ marginLeft: "1rem" }}
+            >
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <nav>
