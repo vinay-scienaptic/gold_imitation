@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import vsImage from "../../VS.png";
+import { file_loc } from "../fetch/get_file";
 import { formatToINR } from "../../utils/formatToINR";
 interface ICustomCard {
   actualPrice: number;
@@ -35,7 +36,7 @@ const CustomCard = ({
     >
       <CardMedia
         sx={{ height: 175, objectFit: "fill" }}
-        image={vsImage}
+        image={file_loc}
         title="green iguana"
       />
       <CardContent>
