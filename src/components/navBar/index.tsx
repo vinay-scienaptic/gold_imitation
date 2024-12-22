@@ -7,8 +7,6 @@ import {
   Button,
   Drawer,
   IconButton,
-  Avatar,
-  CircularProgress,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { jwtDecode } from "jwt-decode";
