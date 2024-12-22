@@ -3,7 +3,7 @@ import {
   faInstagram,
   faWhatsappSquare,
 } from "@fortawesome/free-brands-svg-icons";
-import { Container, Box, Stack, Alert, Paper } from "@mui/material";
+import { Container, Box, Stack, Paper } from "@mui/material";
 import React from "react";
 import ContactCard from "./contactCard";
 
